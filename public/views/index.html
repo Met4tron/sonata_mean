@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Desafio - Sonata</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vendor/angular.min.js"></script>
+    <script src="./vendor/ng-file-upload-all.min.js"></script>
+    <script src="./vendor/jquery.min.js"></script>
+    <script src="../js/fileUpload.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body ng-app="fileUpload">
+    <div ng-controller="formCtrl" class="container-fluid">
+        <h1 class="text-center jumbotron">Desafio - Sonata</h1>
+        <hr>
+        <div class="container" class="center_form">
+            <form ng-submit="submit()" class="center_form">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" ng-model="upload.title" required />
+                </div>
+                <div class="form-group">
+                    <label for="file">Arquivo:</label>
+                    <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" value="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Titulo</th>
+                    <th class="text-center">Documento</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="upload in uploads">
+                    <td class="text-center">{{upload.title}}</td>
+                    <td class="text-center"><a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger text-center" ng-click="delete(upload.file.path)">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
